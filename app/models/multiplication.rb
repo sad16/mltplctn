@@ -12,8 +12,8 @@ class Multiplication < ApplicationRecord
             }
 
   def call
-    # MultiplicationWorker.perform_async(id)
-    start
+    MultiplicationWorker.perform_async(id)
+    # start
   end
 
   def start
