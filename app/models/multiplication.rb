@@ -12,8 +12,8 @@ class Multiplication < ApplicationRecord
             }
 
   def call
-    MultiplicationWorker.perform_async(id)
-    # start
+    # MultiplicationWorker.perform_async(id)
+    start
   end
 
   def start
@@ -33,8 +33,9 @@ class Multiplication < ApplicationRecord
   end
 
   def publish(multiplicand: , multiplier: , result: , sum:)
-    ActionCable.server.broadcast(
-      "multiplication:#{id}", 
+    # ActionCable.server.broadcast(
+    MultiplicationChannel.broadcast_to(
+      id, 
       multiplication: { 
         multiplicand: multiplicand,
         multiplier: multiplier,
