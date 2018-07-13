@@ -1,1 +1,1 @@
-worker: bundle exec sidekiq -q multiplication
+worker: bundle exec sidekiq -c 1 -q multiplication
