@@ -3,9 +3,9 @@ class MultiplicationsController < ApplicationController
     multiplication = Multiplication.new(multiplication_params)
 
     if multiplication.save
-      render json: { success: { code: 200, message: '' } }, status: 200
+      render json: { success: { code: 200, message: 'success' } }, status: 200
     else
-      render json: { error: { code: 400, message: '' } }, status: 400
+      render json: { error: { code: 400, message: 'error' } }, status: 400
     end
   end
 
