@@ -12,7 +12,7 @@ class Multiplication < ApplicationRecord
             }
 
   def call
-    start
+    MultiplicationWorker.perform_async(id)
   end
 
   def start
@@ -27,6 +27,6 @@ class Multiplication < ApplicationRecord
       acc
     end
 
-    self.update(sum: sum)
+    update(sum: sum)
   end
 end
