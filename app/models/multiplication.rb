@@ -13,20 +13,34 @@ class Multiplication < ApplicationRecord
 
   def call
     MultiplicationWorker.perform_async(id)
+    # start
   end
 
   def start
     multiplicand_range = max_multiplicand > 0 ? (0..max_multiplicand) : (max_multiplicand..0)
     multiplier_range = max_multiplier > 0 ? (0..max_multiplier) : (max_multiplier..0)
 
-    sum = multiplicand_range.reduce(0) do |acc, multiplicand|
+    sum = multiplicand_range.reduce(0) do |sum, multiplicand|
       multiplier_range.each do |multiplier|
         result = multiplicand * multiplier
-        acc = acc + result
+        sum = sum + result
+        publish(multiplicand: multiplicand, multiplier: multiplier, result: result, sum: sum)
       end
-      acc
+      sum
     end
 
     update(sum: sum)
+  end
+
+  def publish(multiplicand: , multiplier: , result: , sum:)
+    ActionCable.server.broadcast(
+      "multiplication:#{id}", 
+      multiplication: { 
+        multiplicand: multiplicand,
+        multiplier: multiplier,
+        result: result,
+        sum: sum
+      }
+    )
   end
 end

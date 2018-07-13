@@ -14,7 +14,7 @@ class MultiplicationsController < ApplicationController
   def show
     render json: { error: { code: 404, message: 'Multiplication not found' } }, status: 404 and return if @multiplication.nil?
 
-    @multiplication.call
+    @multiplication.call if @multiplication.sum.nil?
   end
 
   private
