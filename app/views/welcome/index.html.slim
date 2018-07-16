@@ -1,4 +1,16 @@
-= form_for @multiplication, url: { controller: "multiplications", action: "create" }, remote: true do |f|
-  = f.number_field :max_multiplicand
-  = f.number_field :max_multiplier
-  = f.submit "Create"
+.welcome
+  h1.title Multiplication
+  .description
+    | Input multiplicand. If multiplicand > 0, multiplicand range will be 1..multiplicand, else multiplicand..1.
+    br
+    | Input multiplier. If multiplier > 0, multiplier range will be 1..multiplier, else multiplier..1.
+    br
+    | We will get all multiplication sum.
+
+  = form_for @multiplication, url: { controller: "multiplications", action: "create" }, html: { class: "form" }, remote: true do |f|
+    .form__field
+      = f.number_field :max_multiplicand, class: "form__input"
+    .form__field
+      = f.number_field :max_multiplier, class: "form__input"
+    .form__button
+      = f.submit "start", class: "form__submit"

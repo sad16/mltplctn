@@ -1,10 +1,11 @@
 doctype html
 html
-  head 
+  head
     title Mltplctn
-    = csrf_meta_tag  
-    = action_cable_meta_ta   
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = csrf_meta_tag
+    = action_cable_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  body 
-    = yield
+  body
+    .wrapper
+      = yield
