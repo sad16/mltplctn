@@ -1,5 +1,5 @@
-<%= form_for @multiplication, url: {controller: "multiplications", action: "create"}, html: {class: "nifty_form"} do |f| %>
-  <%= f.number_field :max_multiplicand, in: -10..10, step: 1 %>
-  <%= f.number_field :max_multiplier, in: -10..10, step: 1 %>
+<%= form_for @multiplication, url: { controller: "multiplications", action: "create" }, remote: true do |f| %>
+  <%= f.number_field :max_multiplicand %>
+  <%= f.number_field :max_multiplier %>
   <%= f.submit "Create" %>
 <% end %>

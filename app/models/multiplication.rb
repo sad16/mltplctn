@@ -12,20 +12,23 @@ class Multiplication < ApplicationRecord
             }
 
   def call
-    MultiplicationWorker.perform_async(id)
-    # start
+    if Rails.env.development?
+      MultiplicationWorker.new.perform(id)
+    else
+      MultiplicationWorker.perform_async(id)
+    end
   end
 
   def start
-    multiplicand_range = max_multiplicand > 0 ? (0..max_multiplicand) : (max_multiplicand..0)
-    multiplier_range = max_multiplier > 0 ? (0..max_multiplier) : (max_multiplier..0)
+    multiplicand_range = max_multiplicand > 0 ? (1..max_multiplicand) : (max_multiplicand..-1)
+    multiplier_range = max_multiplier > 0 ? (1..max_multiplier) : (max_multiplier..-1)
 
     sum = multiplicand_range.reduce(0) do |sum, multiplicand|
       multiplier_range.each do |multiplier|
         result = multiplicand * multiplier
         sum = sum + result
         publish(multiplicand: multiplicand, multiplier: multiplier, result: result, sum: sum)
-        sleep 2
+        sleep 0.2
       end
       sum
     end
@@ -34,7 +37,6 @@ class Multiplication < ApplicationRecord
   end
 
   def publish(multiplicand: , multiplier: , result: , sum:)
-    # ActionCable.server.broadcast(
     MultiplicationChannel.broadcast_to(
       id, 
       multiplication: { 
