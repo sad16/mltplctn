@@ -18,7 +18,7 @@ class MultiplicationsController < ApplicationController
       render json: { 
         error: { 
           code: 400, 
-          message: 'Multiplication didn`t create',
+          message: 'Multiplication not created',
           result: {
             errors: multiplication.errors.messages
           } 
@@ -41,7 +41,12 @@ class MultiplicationsController < ApplicationController
 
   def call
     @multiplication.call if @multiplication.sum.nil?
-    render json: { success: { code: 200, message: 'success' } }, status: 200
+    render json: { 
+      success: { 
+        code: 200, 
+        message: 'Multiplication called' 
+      } 
+    }, status: 200
   end
 
   private

@@ -1,0 +1,4 @@
+= form_for @multiplication, url: { controller: "multiplications", action: "create" }, remote: true do |f|
+  = f.number_field :max_multiplicand
+  = f.number_field :max_multiplier
+  = f.submit "Create"

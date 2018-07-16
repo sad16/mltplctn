@@ -30,6 +30,7 @@ gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'sidekiq'
+gem 'slim-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
