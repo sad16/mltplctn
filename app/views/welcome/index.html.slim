@@ -1,16 +1,16 @@
 .welcome
   h1.title Multiplication
   .description
-    | Input multiplicand. If multiplicand > 0, multiplicand range will be 1..multiplicand, else multiplicand..1.
-    br
-    | Input multiplier. If multiplier > 0, multiplier range will be 1..multiplier, else multiplier..1.
-    br
-    | We will get all multiplication sum.
+    p Input multiplicand. If multiplicand > 0, multiplicand range will be from 1 to multiplicand, else from multiplicand to 1.
+    p Input multiplier. If multiplier > 0, multiplier range will be from 1 to multiplier, else from multiplier to 1.
+    p We will get sum of all multiplication.
 
   = form_for @multiplication, url: { controller: "multiplications", action: "create" }, html: { class: "form" }, remote: true do |f|
     .form__field
+      = f.label :max_multiplicand, 'multiplicand', class: "form__label"
       = f.number_field :max_multiplicand, class: "form__input"
     .form__field
+      = f.label :max_multiplicand, 'multiplier', class: "form__label"
       = f.number_field :max_multiplier, class: "form__input"
     .form__button
       = f.submit "start", class: "form__submit"

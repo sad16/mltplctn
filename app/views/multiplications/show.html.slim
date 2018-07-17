@@ -1,5 +1,16 @@
-h1#multiplication_id = @multiplication.id
-h3#max_multiplicand = @multiplication.max_multiplicand
-h3#max_multiplier = @multiplication.max_multiplier
-h3#result 
-h3#sum = @multiplication.sum
+.multiplication
+  .none#multiplication_id = @multiplication.id
+  - if @multiplication.sum.nil?
+    .multiplication__expression
+      #max_multiplicand
+      span
+        | *
+      #max_multiplier
+      span 
+        | =
+      #result
+    .multiplication__sum
+      #sum
+  - else
+    .multiplication__sum
+      #sum = @multiplication.sum

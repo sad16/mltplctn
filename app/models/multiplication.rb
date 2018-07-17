@@ -28,7 +28,7 @@ class Multiplication < ApplicationRecord
         result = multiplicand * multiplier
         sum = sum + result
         publish(multiplicand: multiplicand, multiplier: multiplier, result: result, sum: sum)
-        sleep 0.2
+        sleep 0.5
       end
       sum
     end

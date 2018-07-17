@@ -37,14 +37,28 @@ body
 
   .description
     font-size: 24px
-    margin: 0 16px 16px
+    margin: 0 16px 24px
+    text-align: center
+
+    p
+      margin: 0 0 8px 0
 
   .form
     padding: 0 0 96px 0
     margin: 0 16px      
     display: flex
     justify-content: space-around
-    align-items: center
+    align-items: flex-end
+
+    @media (max-width: 720px)
+      flex-direction: column
+      align-items: center
+
+      &__field
+        margin: 0 0 16px 0
+
+    &__label
+      display: block
 
     &__input
       width: 192px
@@ -68,11 +82,33 @@ body
       padding: 0 16px
       border: 1px solid #6B6F74
       border-radius: 4px
+      font-family: 'Gaegu', 'Arial'
       font-size: 16px
       font-weight: 400
       line-height: 42px
-      color: #6B6F74
-      background: #FFFFFF
+      color: #FFFFFF
+      background: #6B6F74
       text-align: center
       cursor: pointer
       outline: none
+
+      &:hover
+        color: #6B6F74
+        background: #FFFFFF
+
+.multiplication
+  &__expression
+    display: flex
+    justify-content: space-around
+    align-items: center
+    font-size: 48px
+
+  &__sum
+    display: flex
+    justify-content: space-around
+    align-items: center
+    font-size: 72px
+    font-weight: 600
+
+.none
+  display: none
