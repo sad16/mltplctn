@@ -2,15 +2,15 @@
   .none#multiplication_id = @multiplication.id
   - if @multiplication.sum.nil?
     .multiplication__expression
-      #max_multiplicand
+      #max_multiplicand 0
       span
         | *
-      #max_multiplier
+      #max_multiplier 0
       span 
         | =
-      #result
+      #result 0 
     .multiplication__sum
-      #sum
+      #sum 0
   - else
     .multiplication__sum
       #sum = @multiplication.sum
