@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
   resources :multiplications, only: [:create, :show] do
-    get :call, on: :member
+    patch :call, on: :member
   end
 end

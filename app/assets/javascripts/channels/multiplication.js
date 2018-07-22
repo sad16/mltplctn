@@ -1,28 +1,32 @@
 function callMultiplication(id) {
+  var authorization_token = document.getElementsByName('csrf-token')[0].content;
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', '/multiplications/' + id + '/call', true);
+  xhr.open('PATCH', '/multiplications/' + id + '/call', true);
+  xhr.setRequestHeader('X-CSRF-Token', authorization_token);
   xhr.send();
 }
 
 function subscribeToMultiplicationChannel(id) {
   App.cable.subscriptions.create({
-    channel: "MultiplicationChannel",
+    channel: 'MultiplicationChannel',
     id: id
   }, {
     connected: function() {
       // Called when the subscription is ready for use on the server
-      console.log("MultiplicationChannel connected");
+      // console.log('MultiplicationChannel connected');
     },
     disconnected: function() {
       // Called when the subscription has been terminated by the server
-      console.log("MultiplicationChannel disconnected");
+      // console.log('MultiplicationChannel disconnected');
     },
     received: function(data) {
       // Called when theres incoming data on the websocket for this channel
-      document.getElementById("max_multiplicand").innerText = data.multiplication.multiplicand;
-      document.getElementById("max_multiplier").innerText = data.multiplication.multiplier;
-      document.getElementById("result").innerText = data.multiplication.result;
-      document.getElementById("sum").innerText = data.multiplication.sum;
+      var multiplication = data.multiplication;
+      changeInnerTextInElement(findElementById('multiplicand'), multiplication.multiplicand); 
+      changeInnerTextInElement(findElementById('multiplier'), multiplication.multiplier); 
+      changeInnerTextInElement(findElementById('result'), multiplication.result); 
+      changeInnerTextInElement(findElementById('sum'), multiplication.sum); 
     }
   });
 }
+

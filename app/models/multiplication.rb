@@ -1,27 +1,28 @@
 class Multiplication < ApplicationRecord
-  validates :max_multiplicand,
-            :max_multiplier,
+  validates :multiplicand,
+            :multiplier,
             presence: true
 
-  validates :max_multiplicand,
-            :max_multiplier,
+  validates :multiplicand,
+            :multiplier,
             numericality: { 
               only_integer: true,
+              other_than: 0,
               greater_than: -11,
               less_than: 11
             }
 
   def call
-    if Rails.env.development?
-      MultiplicationWorker.new.perform(id)
-    else
+    unless Rails.env.development?
       MultiplicationWorker.perform_async(id)
+    else
+      MultiplicationWorker.new.perform(id)
     end
   end
 
   def start
-    multiplicand_range = max_multiplicand > 0 ? (1..max_multiplicand) : (max_multiplicand..-1)
-    multiplier_range = max_multiplier > 0 ? (1..max_multiplier) : (max_multiplier..-1)
+    multiplicand_range = multiplicand > 0 ? (1..multiplicand) : (multiplicand..-1)
+    multiplier_range = multiplier > 0 ? (1..multiplier) : (multiplier..-1)
 
     sum = multiplicand_range.reduce(0) do |sum, multiplicand|
       multiplier_range.each do |multiplier|

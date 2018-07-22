@@ -3,17 +3,26 @@ if (location.pathname == "/") {
 }
 
 function welcomeReady() {
-  var form = document.getElementById("new_multiplication");
+  var form = findElementById("new_multiplication");
 
   form.addEventListener("ajax:success", function(event) {
-    xhr = event.detail[0];
-    redirect_url = xhr.success.result.redirect_url;
+    clearFormErrors(form);
+
+    var xhr = event.detail[0];
+    var redirect_url = xhr.success.result.redirect_url;
+
     window.open(redirect_url, '_self');
   });
 
   form.addEventListener("ajax:error", function(event) {
-    xhr = event.detail[0];
-    errors = xhr.error.result.errors;
-    console.log(errors);
+    clearFormErrors(form);
+
+    var xhr = event.detail[0];
+    var errors = xhr.error.result.errors;
+
+    for (field in errors) {
+      var error_field = findElementById(field + "_errors");
+      error_field.innerText = errors[field][0];
+    }
   });
 }

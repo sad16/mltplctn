@@ -5,12 +5,16 @@
     p Input multiplier. If multiplier > 0, multiplier range will be from 1 to multiplier, else from multiplier to 1.
     p We will get sum of all multiplication.
 
-  = form_for @multiplication, url: { controller: "multiplications", action: "create" }, html: { class: "form" }, remote: true do |f|
+  = form_for @multiplication, url: { controller: 'multiplications', action: 'create' }, html: { class: 'form' }, remote: true do |f|
     .form__field
-      = f.label :max_multiplicand, 'multiplicand', class: "form__label"
-      = f.number_field :max_multiplicand, class: "form__input"
+      .form__label
+        => f.label :multiplicand, 'multiplicand'
+        .error#multiplicand_errors
+      = f.number_field :multiplicand, class: 'form__input'
     .form__field
-      = f.label :max_multiplicand, 'multiplier', class: "form__label"
-      = f.number_field :max_multiplier, class: "form__input"
+      .form__label
+        => f.label :multiplier, 'multiplier'
+        .error#multiplier_errors
+      = f.number_field :multiplier, class: 'form__input'
     .form__button
-      = f.submit "start", class: "form__submit"
+      = f.submit 'start', class: 'form__submit'

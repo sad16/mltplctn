@@ -28,15 +28,6 @@ class MultiplicationsController < ApplicationController
   end
 
   def show
-    if @multiplication.nil?
-      render json: { 
-        error: { 
-          code: 404, 
-          message: 'Multiplication not found' 
-        }
-      }, status: 404
-      return
-    end
   end
 
   def call
@@ -52,10 +43,19 @@ class MultiplicationsController < ApplicationController
   private
 
   def multiplication_params
-    params.require(:multiplication).permit(:max_multiplicand, :max_multiplier)
+    params.require(:multiplication).permit(:multiplicand, :multiplier)
   end
 
   def find_multiplication
     @multiplication = Multiplication.find_by(id: params[:id])
+
+    if @multiplication.nil?
+      render json: { 
+        error: { 
+          code: 404, 
+          message: 'Multiplication not found' 
+        }
+      }, status: 404
+    end
   end
 end
