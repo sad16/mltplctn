@@ -33,12 +33,14 @@ rake db:migrate
 
 ### Install Redis
 [Install Redis](https://redis.io/topics/quickstart)
+
 Run:
 ```
 redis-server
 ```
 ### Install Sidekiq
 [Install Sidekiq](https://github.com/mperham/sidekiq)
+
 Run:
 ```
 sidekiq
